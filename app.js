@@ -28,7 +28,10 @@ var findLatestWeightFast = function(weights) {
         
         let endMass = weightsArray.length-1;
         // check if end mass as an even number or empty - annihilate those molecules/get rid of the slot
-        if (weightsArray[endMass]%2===0 || !weightsArray[endMass]) weightsArray.pop();
+        while (weightsArray[endMass]%2===0 || !weightsArray[endMass]) {
+            weightsArray.pop();
+            endMass = weightsArray.length-1;
+        };
         
         let i = weightsArray.length-1;
         let prevOdd = false;
@@ -37,7 +40,7 @@ var findLatestWeightFast = function(weights) {
         
         // collision search
         
-        console.log("i =", i)
+        // console.log("i =", i)
         while (i >= 0) { //find too biggest masses
             // collision happens here
             if (weightsArray[i]) { // if there is molecules of that mass
@@ -65,10 +68,9 @@ var findLatestWeightFast = function(weights) {
         if (currentLength === weightsArray.length) return prevIndex;
 
     };
-    
     return 0;
 };
 
-// console.log(findLatestWeight([2,7,4,1,8,100]));
-console.log(findLatestWeightFast([2,7,4,1,8,1]));
-// console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,3,4,5,3,4,2,5]));
+// console.log(findLatestWeight([2,7,4,1,8,1000]));
+// console.log(findLatestWeightFast([2,7,4,1,8,1000]));
+console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,3,4,5,3,4,2,5]));
