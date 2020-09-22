@@ -21,22 +21,14 @@ var findLatestWeightFast = function(weights) {
     weights.forEach(element => {
         weightsArray[element] = (!weightsArray[element]) ? 1 : weightsArray[element]+1;
     });
-    console.table(weightsArray);
+    // console.table(weightsArray);
 
     while (weightsArray.length > 0) {   
         console.log('array length = ', weightsArray.length);
         
         let endMass = weightsArray.length-1;
-        // check if end mass as an even number
-        if (weightsArray[endMass]%2===0){ // if their number is even
-            weightsArray.pop(); // annihilate those molecules
-        };  
-        // check if end mass is empty
-        if (!weightsArray[endMass]){ // if it's empty
-            weightsArray.pop(); // get rid of the slot
-        };
-        
-        // let's say we have [_,_,_,3] one mass with odd number
+        // check if end mass as an even number or empty - annihilate those molecules/get rid of the slot
+        if (weightsArray[endMass]%2===0 || !weightsArray[endMass]) weightsArray.pop();
         
         let i = weightsArray.length-1;
         let prevOdd = false;
@@ -65,7 +57,6 @@ var findLatestWeightFast = function(weights) {
                 } else {
                     prevOdd = false;
                 };
-
             };
             i -=1;
         };
