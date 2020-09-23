@@ -4,17 +4,6 @@
 // В качестве выходных данных необходимо вернуть число, которое обозначает вес последней молекулы. 
 // Если молекул не останется, то необходимо вернуть 0.
 
-var findLatestWeight = function(weights, i = weights.length - 1) {  //pass: array, and i or (array.length-i) 
-    const cur = weights.length - 1 === i;  // set cur as boolean: array.lenght === i
-    if (i === 0) return weights[0];  // if i === 0 return first item in array
-    weights.sort((a, b) => a - b);  // sort in ascending order
-    
-    console.log(weights);
-    // set array previous to (if current equals previous then 0, else the difference) 
-    weights[i - 1] = (weights[i] === weights[i-1]) ? 0 : weights[i] - weights[i-1];
-    return findLatestWeight(weights, i - 1);  // call the recursion with array and i-1 
-};
-
 var findLatestWeightFast = function(weights) {
     // distribute the array into another grouping array
     let weightsArray = [];
@@ -71,6 +60,6 @@ var findLatestWeightFast = function(weights) {
     return 0;
 };
 
-// console.log(findLatestWeight([2,7,4,1,8,1000]));
-// console.log(findLatestWeightFast([2,7,4,1,8,1000]));
-console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,3,4,5,3,4,2,5]));
+
+console.log(findLatestWeightFast([2,7,4,1,8,10]));
+// console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,3,4,5,3,4,2,5]));
