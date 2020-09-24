@@ -56,22 +56,37 @@ let collide = function (groupedWeights) {
 
 let findLatestWeightFast = function(weights) {
     let groupedWeights = groupWeights(weights);
-    console.table(groupedWeights);
     // try to find last weight by colliding different molecules
     
-    while (groupedWeights.length > 0) {   
-        groupedWeights = cutTail(groupedWeights);
-
-        let currentLength = groupedWeights.length;
-        if (currentLength === 0) return 0;
-
-        // collision search
-        groupedWeights = collide(groupedWeights);
-
-        console.table(groupedWeights);
+    while (groupedWeights.length) {   
+    // while (length)    
+        // grab length
+        // grab last
+        // if last is even or empty - pop
+        // else odd - collide
+        // if length is same - return last index
+    // return 0 
         
-        //if no collision happened (no second mass to collide with)
-        if (currentLength === groupedWeights.length) return groupedWeights.length-1;
+        
+        let length = groupedWeights.length;
+        let last = groupedWeights[length-1];
+
+        if (last%2===0 || !last) { // even or empty
+            console.log('pop');
+            groupedWeights.pop();
+        } else { // odd
+            groupedWeights = collide(groupedWeights);
+        };
+        console.log(groupedWeights);
+        if (length === groupedWeights.length) return length-1;
+
+        // // groupedWeights = cutTail(groupedWeights);
+
+
+        // // collision search
+        // groupedWeights = collide(groupedWeights);
+        // //if no collision happened (no second mass to collide with)
+        // if (length === groupedWeights.length) return groupedWeights.length-1;
 
     };
 
@@ -79,5 +94,5 @@ let findLatestWeightFast = function(weights) {
     return 0;
 };
 
-// console.log(findLatestWeightFast([2,7,4,1,8,1,3]));
-console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,3,4,5,3,4,2,5,20]));
+console.log(findLatestWeightFast([2,7,4,1,8,1]));
+// console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,20]));
