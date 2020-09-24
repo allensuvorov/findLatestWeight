@@ -20,8 +20,8 @@ let groupWeights = function(weights) {
 // collision - search smaller molecule
 let collide = function (groupedWeights) {
     let length = groupedWeights.length;
-    for (let i = length-2; i>0; i--) {
-        if (groupedWeights[i]) { // look for next molecule 
+    for (let i = length-2; i>0; i--) { // look for next molecule
+        if (groupedWeights[i]) { 
             let diff = length-1 - i; // collide the masses and get the difference mass
             console.log(`colliding ${length-1} and ${i} gives ${diff}.`)
             groupedWeights[diff] = (!groupedWeights[diff]) ? 1 : groupedWeights[diff]+1; // add diff mass
