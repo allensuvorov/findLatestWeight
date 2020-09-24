@@ -8,7 +8,7 @@
         // if length is same - return last index
 // return 0 
 
-// group weights to indices of another array
+// group weights by indices of another array
 let groupWeights = function(weights) {
     let groupedWeights = [];
     weights.forEach(element => {
@@ -51,5 +51,5 @@ let findLatestWeightFast = function(weights) {
     return 0;
 };
 
-// console.log(findLatestWeightFast([2,7,4,1,8,1]));
-console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,20]));
+console.log(findLatestWeightFast([2,7,4,1,8,1]));
+// console.log(findLatestWeightFast([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,20]));
