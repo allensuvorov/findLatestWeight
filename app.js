@@ -4,7 +4,7 @@
         // grab map size
         // find max key
         // if max key value is even - pop
-        // else (odd) - collide -> map(max group annihilated)
+        // else (odd) - collide -> map(max group gets annihilated)
         // if map size is same - return key
 // return 0
 
@@ -33,7 +33,7 @@ let collide = function (weightsMap) {
             weightsMap.set(nextMax, weightsMap.get(nextMax)-1) // remove one molecule
             if (weightsMap.get(nextMax)===0) weightsMap.delete(nextMax); // if next is empty - pop
             weightsMap.set(max-nextMax, (weightsMap.get(max-nextMax) || 0)+1); // add diff mass molecule
-            console.log(`colliding ${max} and ${nextMax} creates ${max-nextMax}`);
+            // console.log(`colliding ${max} and ${nextMax} creates ${max-nextMax}`);
         };
     };
     return (weightsMap);
@@ -41,17 +41,16 @@ let collide = function (weightsMap) {
 
 let findLatestWeight = function(weights) {
     let weightsMap = mapWeights(weights);
-    
     while (weightsMap.size) {       
         let size = weightsMap.size; // grab map size
         weightsMap = collide(weightsMap); // collide 
         // console.log('map is:', weightsMap);
-        if (weightsMap.size === 1) return Array.from(weightsMap.keys())[0]; // if one molecule left
+        if (weightsMap.size === size) return Array.from(weightsMap.keys())[0]; // if no collision found
     };
     // if all molecules annihilated in collision return zero
     return 0;
 };
 
-// console.log(findLatestWeight([2,7,4,1,8,1]));
-console.log(findLatestWeight([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,2,1,1]));
-// console.log()
+console.log(findLatestWeight([2,7,4,1,8,1]));
+// console.log(findLatestWeight([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,2,1,1]));
+// console.log(findLatestWeight([2,2,2,2,1,1,3,3,4,4,8,8,]))
