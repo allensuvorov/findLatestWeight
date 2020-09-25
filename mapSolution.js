@@ -1,4 +1,4 @@
-// pseudo code:
+// pseudo code: map solution
 // group weights in to a map object
 // while (map size)    
         // grab map size
