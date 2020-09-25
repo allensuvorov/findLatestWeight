@@ -47,7 +47,7 @@ let findLatestWeight = function(weights) {
         let size = weightsMap.size; // grab map size
         weightsMap = collide(weightsMap); // collide 
         // console.log('map is:', weightsMap);
-        if (weightsMap.size === size) return Array.from(weightsMap.keys())[0]; // if no collision found
+        if (weightsMap.size === size && size === 1) return Array.from(weightsMap.keys())[0]; // if no collision found
     };
     // if all molecules annihilated in collision return zero
     return 0;
