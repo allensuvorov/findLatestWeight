@@ -13,7 +13,7 @@ let mapWeights = function(weights) {
     console.time("mapWeights")
     let weightsMap = new Map();
     weights.forEach(element => {
-        weightsMap.set(element, (weightsMap.get(element) || 0)+1);
+        if (element) weightsMap.set(element, (weightsMap.get(element) || 0)+1);
     });
     console.log("map is ready");
     // console.table(weightsMap);
@@ -37,7 +37,7 @@ let collide = function (weightsMap) {
             weightsMap.set(nextMax, weightsMap.get(nextMax)-1) // remove one molecule
             if (weightsMap.get(nextMax)===0) weightsMap.delete(nextMax); // if next is empty - pop
             weightsMap.set(max-nextMax, (weightsMap.get(max-nextMax) || 0)+1); // add diff mass molecule
-            console.log(`colliding ${max} and ${nextMax} creates ${max-nextMax}`);
+            // console.log(`colliding ${max} and ${nextMax} creates ${max-nextMax}`);
             // console.log(weightsMap);
             // max = (max-nextMax>nextMax)? max-nextMax : nextMax;
         };
@@ -49,10 +49,10 @@ let findLatestWeight = function(weights) {
     let weightsMap = mapWeights(weights);
     console.time("findLatestWeight")
     while (weightsMap.size) {       
-        let size = weightsMap.size; // grab map size
+        // let size = weightsMap.size; // grab map size
         weightsMap = collide(weightsMap); // collide 
         // console.log('map is:', weightsMap);
-        if (weightsMap.size === size && size === 1) {
+        if (weightsMap.size === 1) {
             console.timeLog("findLatestWeight");
             return Array.from(weightsMap.keys())[0]; // if no collision found
         };
@@ -65,16 +65,16 @@ let findLatestWeight = function(weights) {
 // console.log(findLatestWeight([2,7,4,1,8,1])===1); //
 // console.log(findLatestWeight([2,7,4,1,8,1,1,2,3,1,4,5,6,7,8,9,9,3,4,5,3,4,2,5,2,1,1])===0);
 // console.log(findLatestWeight([10,5,5,1,10000,555,333,444,666,777,888,999,9,8,7,6,5,4,3,2,1]));
+// console.log(findLatestWeight([0,0,0,0,1,1,1,1,3,]));
 
 let buildArray = function(length, max) {
     console.time("buildArray")
     let array = [];
     for (let i = 0; i < length; i++){
-        array[i] = Math.floor(Math.random() * Math.floor(max))
+        array[i] = Math.ceil(Math.random() * Math.floor(max))
     };
     console.log ('length:', length, 'max :', max);
     console.timeEnd("buildArray")
     return array;
 };
-let sizes = [100, 1000, 10000, 100000, 1000000, 10000000]
-console.log(findLatestWeight(buildArray(100200300,100)));
+console.log(findLatestWeight(buildArray(100200,30020)));
