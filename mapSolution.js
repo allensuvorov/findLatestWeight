@@ -22,10 +22,21 @@ let mapWeights = function(weights) {
     return weightsMap;
 };
 
+// max search
+let findMax = function (weightsMap) {
+    // console.time('findMax')
+    let array = Array.from(weightsMap.keys()); // put keys to array
+    let max = array[0];
+    for (let i = 1; i <array.length; i++) {
+        if (array[i]> max) max = array[i];
+    };
+    // console.timeEnd('findMax')
+    return max;
+};
 
 // collision - search smaller molecule
 let collide = function (weightsMap) {
-    let max = Math.max(...weightsMap.keys()); // find max key
+    let max = findMax(weightsMap); // find max key
     // console.log(weightsMap);
     if (weightsMap.get(max)%2===0) { // if max value is even
         weightsMap.delete(max); // pop max
@@ -33,7 +44,7 @@ let collide = function (weightsMap) {
         if (weightsMap.size>1) { // if size is bigger then one
             // console.log('map size is:', weightsMap.size);
             weightsMap.delete(max); // pop max
-            let nextMax = Math.max(...weightsMap.keys()); // find next to max
+            let nextMax = findMax(weightsMap); // find next to max
             weightsMap.set(nextMax, weightsMap.get(nextMax)-1) // remove one molecule
             if (weightsMap.get(nextMax)===0) weightsMap.delete(nextMax); // if next is empty - pop
             weightsMap.set(max-nextMax, (weightsMap.get(max-nextMax) || 0)+1); // add diff mass molecule
